@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: "https://stylocart.netlify.app/",
+  origin: "https://stylocart.netlify.app",
   credentials: true
 }));
 
