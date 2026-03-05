@@ -72,7 +72,7 @@ const getCart = async (req, res) => {
 const removeFromCart = async (req, res) => {
   try {
     const email = req.cookies.email;
-    const { id } = req.params; // cart item id (_id in Cart collection)
+    const { id } = req.params;
 
     if (!email) {
       return res.status(401).json({ error: "User not logged in" });
@@ -84,7 +84,6 @@ const removeFromCart = async (req, res) => {
       return res.status(404).json({ error: "Cart item not found" });
     }
 
-    // return updated cart also
     const cartItems = await Cart.find({ email });
 
     res.json({

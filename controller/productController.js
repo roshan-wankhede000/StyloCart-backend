@@ -4,16 +4,13 @@ let addproduct = async (req, res) => {
   try {
     let { name, description, category, subCategory, price, sizes, bestseller } = req.body;
 
-    // Safely access uploaded image filenames
     let image1 = req.files?.image1?.[0]?.filename || "";
     let image2 = req.files?.image2?.[0]?.filename || "";
     let image3 = req.files?.image3?.[0]?.filename || "";
     let image4 = req.files?.image4?.[0]?.filename || "";
 
-    // Handle checkbox values properly
-    // If sizes are checkboxes, multiple values might be submitted
     if (Array.isArray(sizes)) {
-      sizes = sizes.join(","); // Convert to string (comma-separated)
+      sizes = sizes.join(",");
     }
 
     if (bestseller === "on") {

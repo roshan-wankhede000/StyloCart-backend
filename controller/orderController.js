@@ -1,5 +1,5 @@
 let Order = require("../model/ordersModel")
-const Cart = require("../model/cartModel"); // Adjust the path as needed
+const Cart = require("../model/cartModel"); 
 
 const placeOrder = async (req, res) => {
   try {
@@ -24,7 +24,7 @@ const placeOrder = async (req, res) => {
       price: item.unitPrice,
       quantity: item.quantity,
       size: item.size,
-      image: item.image  // ✅ Correct image field
+      image: item.image
     }));
 
     const newOrder = new Order({

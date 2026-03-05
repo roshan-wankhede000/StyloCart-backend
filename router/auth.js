@@ -1,7 +1,7 @@
-// server.js or routes/auth.js
+
 const express = require('express');
 const passport = require('passport');
-require('../controller/passportController'); // Make sure this is imported
+require('../controller/passportController');
 const router = express.Router();
 
 router.get('/auth/google',
@@ -14,9 +14,7 @@ router.get('/auth/google/callback',
     session: true
   }),
   (req, res) => {
-    // ✅ Access email here
 
-    // Optional: set cookie
     res.cookie("email", req.user.email, {
       httpOnly: false,
       sameSite: 'Lax',

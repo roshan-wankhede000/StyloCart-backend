@@ -8,13 +8,12 @@ let {getAllOrders, deleteitems} = require("../controller/adminController")
 const controller = require('../controller/orderController');
 let multer = require("multer");
 
-// Corrected 'storage' spelling
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads"); // Make sure this folder exists
+    cb(null, "./uploads"); 
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); // FIXED THIS LINE
+    cb(null, file.originalname); 
   }
 });
 
@@ -45,7 +44,7 @@ router.get("/getorders",getOrders)
 
 router.get("/getAllOrders",getAllOrders)
 // router.get("/deleteitems/:id", deleteitems)
-router.delete('/deleteitems/:id', deleteitems); // from adminController, already destructured
+router.delete('/deleteitems/:id', deleteitems);
 
 
 module.exports = router;

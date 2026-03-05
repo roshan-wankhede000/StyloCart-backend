@@ -1,4 +1,3 @@
-// config/passport.js
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../model/registerModel');
@@ -10,14 +9,14 @@ passport.use(new GoogleStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
   try {
-    const email = profile.emails[0].value; // ✅ Get email ID
+    const email = profile.emails[0].value; 
     let user = await User.findOne({ email });
 
     if (!user) {
       user = await User.create({
         username: profile.displayName,
         email: email,
-        password: null, // since OAuth, no password
+        password: null, 
       });
     }
 
