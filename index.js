@@ -14,7 +14,6 @@ const axios = require("axios");
 dotenv.config()
 
 const port = process.env.PORT || 8000
-const _dirname = path.resolve()
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URL)
@@ -40,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://stylocart.netlify.app/",
   credentials: true
 }));
 
@@ -49,10 +48,6 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/", route);
 
-app.use(express.static(path.join(_dirname, "/frontend/dist")))
-app.get(/.*/,(req,res)=>{
-  res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"))
-})
 
 // Schedule: every 10 minutes
 cron.schedule("*/10 * * * *", async () => {
