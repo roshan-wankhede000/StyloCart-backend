@@ -23,7 +23,7 @@ router.get('/auth/google/callback',
       secure: false
     });
 
-    res.redirect('https://stylocart.onrender.com/');
+    res.redirect('https://stylocart.netlify.app/');
   }
 );
 
