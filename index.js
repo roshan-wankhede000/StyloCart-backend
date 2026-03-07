@@ -40,6 +40,7 @@ app.use((req, res, next) => {
 
 app.use(cors({
   origin: "https://stylocart.netlify.app",
+  // origin: "http://localhost:5173",
   credentials: true
 }));
 
