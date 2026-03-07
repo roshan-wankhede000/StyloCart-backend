@@ -43,11 +43,11 @@ let checkLogin = async (req, res) => {
       return res.status(401).json({ message: "Username Or Password Not Correct" });
     }
 
-    res.cookie("email", user.email, {
-      httpOnly: false,
-      sameSite: 'lax',
-      secure: false
-    });
+res.cookie("email", user.email, {
+  httpOnly: false,
+  sameSite: "none",
+  secure: true
+});
 
     return res.status(200).json({email:user.email, message: "Login Successfully!!" });
   } catch (error) {
@@ -58,11 +58,10 @@ let checkLogin = async (req, res) => {
 
 let logOut = async (req, res) => {
   try {
-    res.clearCookie('email', {
-      path: '/',
-      sameSite: 'Strict',
-      secure: false
-    });
+res.clearCookie("email", {
+  sameSite: "none",
+  secure: true
+});
 
     return res.status(200).json({ message: "User Logout successfully" });
   } catch (error) {
