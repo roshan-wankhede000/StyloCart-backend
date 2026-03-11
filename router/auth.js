@@ -21,7 +21,8 @@ router.get('/auth/google/callback',
       secure: false
     });
 
-    res.redirect('https://stylocart.netlify.app/');
+    res.redirect('https://stylocart.netlify.app/?email=${req.user.email}');
+    // res.redirect(`http://localhost:5173/?email=${req.user.email}`)
   }
 );
 
