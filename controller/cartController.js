@@ -5,8 +5,11 @@ const cookie =  require("cookie-parser")
 const addToCart = async (req, res) => {
   try {
     const { id } = req.params;
-    const { size, quantity } = req.body;
-    const email = req.cookies.email;
+    const { size, quantity, email: bodyEmail } = req.body;
+
+    const email = req.cookies.email || bodyEmail;
+
+    console.log("email of cart:", email);
 
     if (!email || !size) {
       return res.status(400).json({ error: 'Email and size are required' });
@@ -14,10 +17,8 @@ const addToCart = async (req, res) => {
 
     const product = await Product.findById(id);
     if (!product) {
- 
       return res.status(404).json({ error: 'Product not found' });
     }
-
 
     const qtyToAdd = quantity ? parseInt(quantity) : 1;
 
@@ -31,6 +32,7 @@ const addToCart = async (req, res) => {
       existingItem.quantity += qtyToAdd;
       existingItem.totalPrice = existingItem.unitPrice * existingItem.quantity;
       await existingItem.save();
+
       return res.json({ message: 'Quantity updated', cartItem: existingItem });
     }
 
@@ -42,10 +44,11 @@ const addToCart = async (req, res) => {
       image: product.image1,
       size,
       quantity: qtyToAdd,
-      email:email
+      email
     });
 
     await newCart.save();
+
     res.json({ message: 'Product added to cart', cartItem: newCart });
 
   } catch (err) {
