@@ -12,10 +12,10 @@ let registerUser = async (req, res) => {
     const { username, email, password } = req.body;
     const hashedPassword = await hashPassword(password);
 
-    let user = await register.findOne({email})
+    let user = await register.findOne({ email })
 
     if (user) {
-      return res.status(409).json({ message: "This email is already registered. Please log in or use a different email."});
+      return res.status(409).json({ message: "This email is already registered. Please log in or use a different email." });
     }
 
     await register.create({ username, email, password: hashedPassword });
@@ -43,13 +43,13 @@ let checkLogin = async (req, res) => {
       return res.status(401).json({ message: "Username Or Password Not Correct" });
     }
 
-res.cookie("email", user.email, {
-  httpOnly: false,
-  sameSite: "none",
-  secure: true
-});
+    res.cookie("email", user.email, {
+      httpOnly: false,
+      sameSite: "none",
+      secure: true
+    });
 
-    return res.status(200).json({email:user.email, message: "Login Successfully!!" });
+    return res.status(200).json({ email: user.email, message: "Login Successfully!!" });
   } catch (error) {
     console.error("Login error:", error);
     return res.status(500).json({ message: "Internal Server Error" });
@@ -58,10 +58,11 @@ res.cookie("email", user.email, {
 
 let logOut = async (req, res) => {
   try {
-res.clearCookie("email", {
-  sameSite: "none",
-  secure: true
-});
+    res.clearCookie("email", {
+      httpOnly: false,
+      sameSite: "none",
+      secure: true
+    });
 
     return res.status(200).json({ message: "User Logout successfully" });
   } catch (error) {
