@@ -46,7 +46,8 @@ let checkLogin = async (req, res) => {
     res.cookie("email", user.email, {
       httpOnly: false,
       sameSite: "none",
-      secure: true
+      secure: true,
+      path: "/"
     });
 
     return res.status(200).json({ email: user.email, message: "Login Successfully!!" });
@@ -61,7 +62,8 @@ let logOut = async (req, res) => {
     res.clearCookie("email", {
       httpOnly: false,
       sameSite: "none",
-      secure: true
+      secure: true,
+      path: "/"
     });
 
     return res.status(200).json({ message: "User Logout successfully" });
